@@ -62,8 +62,7 @@ function getRandomNumber(min, max){
 }
 
 function checkResult(){
-    isWinnerDetermined();
-    return anyMovesLeft();
+    return isWinnerDetermined() || anyMovesLeft();
 }
 
 
@@ -81,32 +80,25 @@ function isWinnerDetermined(){
         //Go  through there winning combinations
         winningCellCombinations.forEach(combination =>
             {
-                let i1 = combination[0];
-                let i2 = combination[1];
-                let i3 = combination[2];
-
-                let element1 = document.querySelector(`[data-cell-index="${i1}"]`);
-                let element2 = document.querySelector(`[data-cell-index="${i2}"]`);
-                let element3 = document.querySelector(`[data-cell-index="${i3}"]`);
-
-                let isGameCompleted = 
-                    element1.innerText == element2.innerText 
-                    && element2.innerText == element3.innerText
-                    && element1.innerText != "";
+                elementValue1 = getDataCellTextValueByIndex(combination[0]);
+                elementValue2 = getDataCellTextValueByIndex(combination[1]);
+                elementValue3 = getDataCellTextValueByIndex(combination[2]);
                 
-                if (isGameCompleted){
+                if (elementValue1 == elementValue2 && elementValue2 == elementValue3 && elementValue1 != ""){
                     var gameStatusElement = document.querySelector(".game--status");
 
-                    gameStatusElement.innerText = `${element1.innerText} has won the game`
+                    gameStatusElement.innerText = `${elementValue1} has won the game`
                     return true;
                 }
+                 
             });
 
-        return false;
-        
+            return false;
 }
 
-
+function getDataCellTextValueByIndex(index){
+    return document.querySelector(`[data-cell-index="${index}"]`).innerText;
+}
 
 function resetGame(){
 
