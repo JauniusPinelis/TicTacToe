@@ -89,9 +89,9 @@ function isWinnerDetermined(){
                     var gameStatusElement = document.querySelector(".game--status");
 
                     gameStatusElement.innerText = `${elementValue1} has won the game`
-                    return true;
+                   
                 }
-                 
+                return true;
             });
 
             return false;
