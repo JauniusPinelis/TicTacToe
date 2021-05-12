@@ -7,11 +7,11 @@ function markX(element){
     if (element.classList.contains("cell") && element.innerText == ""){
         element.innerText = "X";
 
-        let gameContinues = checkResult();
+        let finished = isGameFinished();
 
-        if (gameContinues) {
+        if (finished == false) {
             opponentMove();
-            checkResult();
+            isGameFinished();
         }
     }
     else {
@@ -19,21 +19,6 @@ function markX(element){
     }
 }
 
-function anyMovesLeft(){
-    var cells = Array.from(document.getElementsByClassName("cell"));
-
-    cells = cells.filter(cell => cell.innerText == "");
-
-    if (cells.length == 0){
-        //modify .game--status to be draw
-        var gameStatusElement = document.querySelector(".game--status");
-
-        gameStatusElement.innerText = "DRAW";
-        return false; //the game is finished
-    }
-
-    return true; // the game continues
-}
 
 function opponentMove(){
 
@@ -61,8 +46,24 @@ function getRandomNumber(min, max){
     return Math.floor(r)
 }
 
-function checkResult(){
-    return isWinnerDetermined() || anyMovesLeft();
+function isGameFinished(){
+    return isWinnerDetermined() || noMovesLeft();
+}
+
+function noMovesLeft(){
+    var cells = Array.from(document.getElementsByClassName("cell"));
+
+    cells = cells.filter(cell => cell.innerText == "");
+
+    if (cells.length == 0){
+        //modify .game--status to be draw
+        var gameStatusElement = document.querySelector(".game--status");
+
+        gameStatusElement.innerText = "DRAW";
+        return true; //the game is finished
+    }
+
+    return false; // the game continues
 }
 
 
