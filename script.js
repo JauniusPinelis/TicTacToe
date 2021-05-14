@@ -4,7 +4,7 @@ document.addEventListener('click', function(event) {
 });
 
 function markX(element){
-    if (element.classList.contains("cell") && element.innerText == ""){
+    if (element.classList.contains("cell") && element.innerText == "" && !isGameFinished()){
         element.innerText = "X";
 
         let finished = isGameFinished();
@@ -78,6 +78,8 @@ function isWinnerDetermined(){
         [0,4,8],
         [2,4,6]
     ]
+
+        let isWinnerDetermined = false;
         //Go  through there winning combinations
         winningCellCombinations.forEach(combination =>
             {
@@ -86,15 +88,14 @@ function isWinnerDetermined(){
                 elementValue3 = getDataCellTextValueByIndex(combination[2]);
                 
                 if (elementValue1 == elementValue2 && elementValue2 == elementValue3 && elementValue1 != ""){
+                    
                     var gameStatusElement = document.querySelector(".game--status");
-
                     gameStatusElement.innerText = `${elementValue1} has won the game`
-                   
-                }
-                return true;
+                    isWinnerDetermined = true;
+                } 
             });
 
-            return false;
+            return isWinnerDetermined;
 }
 
 function getDataCellTextValueByIndex(index){
