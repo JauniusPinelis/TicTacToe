@@ -101,7 +101,9 @@ function isWinnerDetermined(){
                     
                     var gameStatusElement = document.querySelector(".game--status");
 
-                    playerWinScore++;
+                    if (elementValue1 == 'X'){
+                        playerWinScore++;
+                    }
 
                     gameStatusElement.innerText = `${elementValue1} has won the game ${playerWinScore} times`;
                     isWinnerDetermined = true;
