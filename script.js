@@ -42,7 +42,7 @@ function opponentMove(){
     cells = cells.filter(cell => cell.innerText == "");
 
     // Get random number
-    let randomNumber = getRandomNumber(0, cells.length);
+    let randomNumber = Math.floor(Math.random()*(cells.length))
 
     // Select random element 
 
@@ -51,12 +51,6 @@ function opponentMove(){
     //and modify its innertext to O
 
     randomCell.innerText = '0'
-}
-  
-
-function getRandomNumber(min, max){
-    const r = Math.random()*(max-min) + min
-    return Math.floor(r)
 }
 
 function isGameFinished(){
@@ -114,5 +108,3 @@ function isWinnerDetermined(){
 function getDataCellTextValueByIndex(index){
     return document.querySelector(`[data-cell-index="${index}"]`).innerText;
 }
-
-
