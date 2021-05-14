@@ -3,6 +3,19 @@ document.addEventListener('click', function(event) {
     markX(target);
 });
 
+function resetGame(){
+
+    // All board cells should be empty;
+    var cells = Array.from(document.getElementsByClassName("cell"));
+
+    cells.forEach(xo => xo.innerText = "");
+
+    // Game Status Text should be empty;
+    var gameStatusElement = document.querySelector(".game--status");
+    gameStatusElement.innerText = ``;
+}
+
+
 function markX(element){
     if (element.classList.contains("cell") && element.innerText == "" && !isGameFinished()){
         element.innerText = "X";
@@ -102,7 +115,4 @@ function getDataCellTextValueByIndex(index){
     return document.querySelector(`[data-cell-index="${index}"]`).innerText;
 }
 
-function resetGame(){
-
-}
 
