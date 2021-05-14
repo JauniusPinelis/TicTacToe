@@ -1,3 +1,5 @@
+var playerWinScore = 0;
+
 document.addEventListener('click', function(event) {
     var target = event.target;
     markX(target);
@@ -75,6 +77,7 @@ function noMovesLeft(){
 
 
 function isWinnerDetermined(){
+    
     let winningCellCombinations = [
         [0,1,2],
         [3,4,5],
@@ -97,7 +100,10 @@ function isWinnerDetermined(){
                 if (elementValue1 == elementValue2 && elementValue2 == elementValue3 && elementValue1 != ""){
                     
                     var gameStatusElement = document.querySelector(".game--status");
-                    gameStatusElement.innerText = `${elementValue1} has won the game`
+
+                    playerWinScore++;
+
+                    gameStatusElement.innerText = `${elementValue1} has won the game ${playerWinScore} times`;
                     isWinnerDetermined = true;
                 } 
             });
